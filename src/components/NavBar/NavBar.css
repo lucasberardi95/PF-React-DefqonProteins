@@ -1,0 +1,9 @@
+li{
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+img{
+    width: 5rem;
+}
