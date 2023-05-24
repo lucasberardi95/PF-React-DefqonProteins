@@ -1,9 +1,9 @@
-import CardWidget from "../CardWidget/CardWidget";
+import CartWidget from "../CartWidget/CartWidget";
 import "./NavBar.css";
-import "../../assets/logo-removebg-preview.png"
+import "../../../public/img/logoprote-removebg-preview.png"
 
 const NavBar = () => {
-    const img = 'https://images.squarespace-cdn.com/content/v1/5e3a2166b359364624466675/1587002076299-7SJLGYI91LZ6X2DI1J1M/213111bdc383402b6b426d7b22796122.jpeg'
+    const img = '../../../public/img/logoprote-removebg-preview.png'
     return (
         <header class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -20,14 +20,11 @@ const NavBar = () => {
                             Nosotros
                         </li>
                         <li class="nav-item">
-                            Indumentaria
-                        </li>
-                        <li class="nav-item">
                             Contacto
                         </li>
                     </ul>
                 </nav>
-                <CardWidget/>
+                <CartWidget/>
             </div>
         </header>
     );
