@@ -1,8 +1,8 @@
 const productos = [
-    { nombre: "Ena TRUEMADE", precio: 1500, id: 1, img: '/src/img/ena.jpg'},
-    { nombre: "Gold Standart 100%", precio: 2500, id: 2, img: '/src/img/gold.jpg'},
-    { nombre: "Star NUTRITION", precio: 1500, id: 3, img: '/src/img/star.jpg'},
-    { nombre: "Xtrenght Advanced", precio: 2000, id: 4, img: '/src/img/xtrenght.jpg'},
+    { nombre: "Ena TRUEMADE", precio: 1500, id: '1', img: '/src/img/ena.jpg', idCat: '2' },
+    { nombre: "Gold Standart 100%", precio: 2500, id: '2', img: '/src/img/gold.jpg', idCat: '2' },
+    { nombre: "Star NUTRITION", precio: 1500, id: '3', img: '/src/img/star.jpg', idCat: '3' },
+    { nombre: "Xtrenght Advanced", precio: 2000, id: '4', img: '/src/img/xtrenght.jpg', idCat: '3' },
 ]
 
 export const getProductos = () => {
@@ -22,3 +22,11 @@ export const getUnProducto = (id) => {
     })
 }
 
+export const getProductosPorCategoria = (idCategoria) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            const productosCategoria = productos.filter(prod => prod.idCat === idCategoria);
+            resolve(productosCategoria);
+        }, 2000)
+    })
+}
