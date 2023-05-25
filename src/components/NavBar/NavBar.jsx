@@ -1,9 +1,9 @@
 import CartWidget from "../CartWidget/CartWidget";
 import "./NavBar.css";
-import "../../../public/img/logoprote-removebg-preview.png"
+import "/src/img/logoprote-removebg-preview.png"
 
 const NavBar = () => {
-    const img = '../../../public/img/logoprote-removebg-preview.png'
+    const img = '/src/img/logoprote-removebg-preview.png'
     return (
         <header class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
