@@ -18,10 +18,10 @@ const NavBar = () => {
                 <nav class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li className="li" class="nav-item">
-                            <NavLink to={`/categoria/2`}> Volumen </NavLink>
+                            <NavLink className={'enlace'} to={`/categoria/2`}> Volumen </NavLink>
                         </li>
                         <li className="li" class="nav-item">
-                            <NavLink to={`/categoria/3`}> Definicion </NavLink>
+                            <NavLink className={'enlace'} to={`/categoria/3`}> Definicion </NavLink>
                         </li>
                     </ul>
                 </nav>
