@@ -2,13 +2,19 @@ import './ItemDetail.css'
 import ItemCount from '../ItemCount/ItemCount'
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { CartContext } from '../../context/CartContext'
+import { useContext } from 'react'
 
 const ItemDetail = ({ id, nombre, precio, img, stock}) => {
     const [agregarCantidad, setAgregarCantidad] = useState (0);
 
+    //useContext: 
+    const { agregarProducto } = useContext(CartContext);
+
     const handleCantidad =(cantidad)=>{
         setAgregarCantidad(cantidad);
-        console.log('Productos agregados: '+ cantidad );
+        const item = { id, nombre, precio };
+        agregarProducto(item, cantidad);
     }
     return (
         <div className='contenedorItem'>
