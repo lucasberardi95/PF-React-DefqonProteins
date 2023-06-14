@@ -7,20 +7,20 @@ import { NavLink, Link } from "react-router-dom"
 const NavBar = () => {
     const img = '/src/img/logoprote-removebg-preview.png'
     return (
-        <header class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
+        <header className="navbar navbar-expand-lg bg-body-tertiary">
+            <div className="container-fluid">
                 <Link to={"/"}>
                 <img className="img" src= {img} alt="Logo" />
                 </Link>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <nav class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li className="li" class="nav-item">
+                <nav className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
                             <NavLink className={'enlace'} to={`/categoria/2`}> Volumen </NavLink>
                         </li>
-                        <li className="li" class="nav-item">
+                        <li className="nav-item">
                             <NavLink className={'enlace'} to={`/categoria/3`}> Definicion </NavLink>
                         </li>
                     </ul>
