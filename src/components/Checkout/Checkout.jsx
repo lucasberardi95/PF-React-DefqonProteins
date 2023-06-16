@@ -5,8 +5,7 @@ import { collection, addDoc } from "firebase/firestore"
 import './Checkout.css'
 
 const Checkout = () => {
-
-    const [cart, vaciarCart] = useContext(CartContext);
+    const {cart, vaciarCart} = useContext(CartContext);
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [telefono, setTelefono] = useState('');
@@ -35,12 +34,12 @@ const Checkout = () => {
         //Paso 1: Creamos el objeto de la orden: 
 
         const orden = {
-            items: carrito.map(producto => ({
+            items: cart.map(producto => ({
                 id: producto.item.id,
                 nombre: producto.item.nombre,
                 cantidad: producto.cantidad
             })),
-            total: carrito.reduce((total, producto) => total + producto.item.precio * producto.cantidad, 0),
+            total: cart.reduce((total, producto) => total + producto.item.precio * producto.cantidad, 0),
             nombre,
             apellido,
             telefono,
@@ -51,11 +50,11 @@ const Checkout = () => {
         addDoc(collection(db, "ordenes"), orden)
             .then(docRef => {
                 setOrdenId(docRef.id);
-                vaciarCarrito();
+                vaciarCart();
             })
             .catch(error => {
                 console.error("Error al crear la orden.", error);
-                setError("Se produjo un error al crear la orden, vuelva prontus");
+                setError("Se produjo un error al crear la orden, vuelva pronto");
             })
 
 
