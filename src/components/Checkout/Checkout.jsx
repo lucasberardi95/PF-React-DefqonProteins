@@ -14,24 +14,24 @@ const Checkout = () => {
     const [error, setError] = useState('');
     const [ordenId, setOrdenId] = useState('');
 
-    //funciones y validaciones: 
+    //Funciones y validaciones: 
 
     const handleForm = (event) => {
         event.preventDefault();
 
-        //Verificamos que los campos esten completos:
+        //Verifico que los campos esten completos:
         if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
             setError("Por favor complete todos los campos");
             return;
         }
 
-        //Validamos que los campos del email coincidan 
+        //Valido que los campos del email coincidan 
         if (email !== emailConfirmacion) {
             setError("Los campos del email no coinciden");
             return;
         }
 
-        //Paso 1: Creamos el objeto de la orden: 
+        //Objeto de la orden: 
 
         const orden = {
             items: cart.map(producto => ({
@@ -49,19 +49,15 @@ const Checkout = () => {
 
         Promise.all(
             orden.items.map(async (productoOrden) => {
-                //Por cada producto en la colección inventario obtengo una referencia, y a partir de esa referencia obtengo el doc. 
                 const productoRef = doc(db, "productos", productoOrden.id);
                 const productoDoc = await getDoc(productoRef);
                 const stockActual = productoDoc.data().stock;
-                //Data es un método qu eme permite acceder a la información del Documento. 
                 await updateDoc(productoRef, {
                     stock: stockActual - productoOrden.cantidad,
                 });
-                //Modifico el stock y subo la información actualizada. 
             })
         )
             .then(() => {
-                //Guardan la orden de compra en la base de datos: 
                 addDoc(collection(db, "ordenes"), orden)
                     .then((docRef) => {
                         setOrdenId(docRef.id);
@@ -76,19 +72,6 @@ const Checkout = () => {
                 console.error("Error al actualizar el stock", error);
                 setError("Se produjo un error al actualizar el stock de los productos, vuelva más tarde");
             })
-
-        //Paso 2: Guardamos la orden en la base de datos:
-        /* addDoc(collection(db, "ordenes"), orden)
-            .then(docRef => {
-                setOrdenId(docRef.id);
-                vaciarCart();
-            })
-            .catch(error => {
-                console.error("Error al crear la orden.", error);
-                setError("Se produjo un error al crear la orden, vuelva pronto");
-            }) */
-
-
     }
 
     return (
