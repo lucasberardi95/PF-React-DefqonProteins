@@ -1,11 +1,11 @@
 import { useState, useContext } from "react"
 import { CartContext } from "../../context/CartContext"
 import { db } from "../../services/config"
-import { collection, addDoc } from "firebase/firestore"
+import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore"
 import './Checkout.css'
 
 const Checkout = () => {
-    const {cart, vaciarCart} = useContext(CartContext);
+    const {cart, vaciarCart, total} = useContext(CartContext);
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [telefono, setTelefono] = useState('');
@@ -43,11 +43,42 @@ const Checkout = () => {
             nombre,
             apellido,
             telefono,
-            email
+            email,
+            fecha: new Date(),
         };
 
+        Promise.all(
+            orden.items.map(async (productoOrden) => {
+                //Por cada producto en la colección inventario obtengo una referencia, y a partir de esa referencia obtengo el doc. 
+                const productoRef = doc(db, "productos", productoOrden.id);
+                const productoDoc = await getDoc(productoRef);
+                const stockActual = productoDoc.data().stock;
+                //Data es un método qu eme permite acceder a la información del Documento. 
+                await updateDoc(productoRef, {
+                    stock: stockActual - productoOrden.cantidad,
+                });
+                //Modifico el stock y subo la información actualizada. 
+            })
+        )
+            .then(() => {
+                //Guardan la orden de compra en la base de datos: 
+                addDoc(collection(db, "ordenes"), orden)
+                    .then((docRef) => {
+                        setOrdenId(docRef.id);
+                        vaciarCart();
+                    })
+                    .catch((error) => {
+                        console.error("Error al crear la orden", error);
+                        setError("Se produjo un error al crear la orden");
+                    })
+            })
+            .catch((error) => {
+                console.error("Error al actualizar el stock", error);
+                setError("Se produjo un error al actualizar el stock de los productos, vuelva más tarde");
+            })
+
         //Paso 2: Guardamos la orden en la base de datos:
-        addDoc(collection(db, "ordenes"), orden)
+        /* addDoc(collection(db, "ordenes"), orden)
             .then(docRef => {
                 setOrdenId(docRef.id);
                 vaciarCart();
@@ -55,7 +86,7 @@ const Checkout = () => {
             .catch(error => {
                 console.error("Error al crear la orden.", error);
                 setError("Se produjo un error al crear la orden, vuelva pronto");
-            })
+            }) */
 
 
     }
@@ -75,6 +106,7 @@ const Checkout = () => {
                         <hr />
                     </div>
                 ))}
+                <p>Total Compra: {total} </p>
                 <hr />
 
                 <div className="form-group">
