@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import {getFirestore} from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBtAigsv33LWdOBGINJ1S2QyhBaEAM-tGQ",
+    apiKey: import.meta.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "defqon-proteins.firebaseapp.com",
     projectId: "defqon-proteins",
     storageBucket: "defqon-proteins.appspot.com",
