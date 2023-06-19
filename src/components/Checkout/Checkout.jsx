@@ -77,8 +77,8 @@ const Checkout = () => {
     return (
 
 
-        <div>
-            <h2>Checkout</h2>
+        <div className="text-white">
+            <h2 className="text-white">Checkout</h2>
             <form onSubmit={handleForm} className="formulario">
                 {cart.map(producto => (
                     <div key={producto.item.id}>
@@ -118,11 +118,11 @@ const Checkout = () => {
                 </div>
 
                 {error && <p style={{ color: "red" }}> {error} </p>}
-                <button type="submit"> Finalizar Compra </button>
+                <button className="btn btn-outline-light" type="submit"> Finalizar Compra </button>
             </form>
             {
                 ordenId && (
-                    <strong>¡Gracias por tu compra! Tu número de Orden es {ordenId} </strong>
+                    <strong className="text-center">¡Gracias por tu compra! Tu número de Orden es {ordenId} </strong>
                 )
             }
         </div>

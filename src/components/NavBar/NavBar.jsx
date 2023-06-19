@@ -5,10 +5,10 @@ import { NavLink, Link } from "react-router-dom"
 
 
 const NavBar = () => {
-    const img = '/src/img/logoprote-removebg-preview.png'
+    const img = '/src/img/logoprote-removebg-preview-removebg-preview1.png'
     return (
-        <header className="navbar navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid">
+        <header className="navbar p-0 navbar-expand-lg bg-secondary">
+            <div className="container-fluid bg-secondary">
                 <Link to={"/"}>
                 <img className="img" src= {img} alt="Logo" />
                 </Link>

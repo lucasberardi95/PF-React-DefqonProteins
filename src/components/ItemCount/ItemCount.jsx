@@ -1,4 +1,4 @@
-import React from 'react'
+import { Link } from 'react-router-dom';
 import { useState } from 'react'
 const ItemCount = ({inicial, stock, funcionAgregar}) => {
 
@@ -17,11 +17,12 @@ const ItemCount = ({inicial, stock, funcionAgregar}) => {
     return (
         <>
         <div>
-            <button onClick={disminuir}> - </button>
+            <button className='btn btn-dark' onClick={disminuir}> - </button>
             <p> {contador} </p>
-            <button onClick={incrementar}> + </button>
+            <button className='btn btn-dark' onClick={incrementar}> + </button>
         </div>
-        <button onClick={()=>funcionAgregar(contador)}> Agregar al carrito </button>
+        <button className='btn btn-dark' onClick={()=>funcionAgregar(contador)}> Agregar al carrito </button>
+        <Link to="/" className='btn btn-dark'> Seguir Comprando</Link>
         </>
         
     )
